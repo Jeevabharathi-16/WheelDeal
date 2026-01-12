@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<h2 class="section-title">My Cart</h2>
+
+{% for c in cart %}
+<div class="card">
+    <h3>{{ c.vehicle.name }}</h3>
+    <p>₹ {{ c.vehicle.price }}</p>
+</div>
+{% empty %}
+<p>No items in cart</p>
+{% endfor %}
+</div>
+{% endblock %}

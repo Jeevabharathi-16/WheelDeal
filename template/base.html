@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WheelDeal</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="navbar">
+    <div><b>WheelDeal</b></div>
+    <div>
+        <a href="/">Home</a>
+        <a href="/cart/">Cart</a>
+        <a href="/sell/">Sell / Exchange</a>
+        {% if user.is_authenticated %}
+            <a href="/logout/">Logout</a>
+        {% else %}
+            <a href="/login/">Login</a>
+        {% endif %}
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

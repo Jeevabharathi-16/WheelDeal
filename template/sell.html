@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-box">
+<h2>Sell / Exchange Vehicle</h2>
+
+<form method="POST">
+{% csrf_token %}
+<select name="type">
+    <option value="car">Car</option>
+    <option value="bike">Bike</option>
+</select>
+
+<input type="text" name="model" placeholder="Model Name">
+<input type="number" name="year" placeholder="Year">
+<input type="number" name="price" placeholder="Expected Price">
+
+<label>
+<input type="checkbox" name="exchange"> Want Exchange
+</label>
+
+<button class="btn">Submit</button>
+</form>
+</div>
+{% endblock %}
