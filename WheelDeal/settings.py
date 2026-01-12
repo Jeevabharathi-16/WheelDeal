@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cars'
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'cars',
+    
 ]
 
 ROOT_URLCONF = 'WheelDeal.urls'
@@ -122,7 +123,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILESDIRS=[BASE_DIR/'static']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
