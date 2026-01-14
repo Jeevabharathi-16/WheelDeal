@@ -3,35 +3,75 @@
 
 <div class="container">
 
-    <h2 id="new">New Vehicles</h2>
-
+    <!-- NEW CARS -->
+    <h2 id="new-cars">New Cars</h2>
     <div class="vehicle-grid">
-        {% for v in new_vehicles %}
+        {% for v in new_cars %}
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.brand }} {{ v.name }}</h3>
+                <h3>{{ v.name }}</h3>
                 <p>{{ v.description|truncatechars:90 }}</p>
                 <div class="price">₹ {{ v.price }}</div>
                 <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
             </div>
         </div>
+        {% empty %}
+        <p>No new cars available</p>
         {% endfor %}
     </div>
 
-    <h2 id="old" style="margin-top:60px;">Old Vehicles</h2>
-
+    <!-- NEW BIKES -->
+    <h2 id="new-bikes" style="margin-top:60px;">New Bikes</h2>
     <div class="vehicle-grid">
-        {% for v in old_vehicles %}
+        {% for v in new_bikes %}
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.brand }} {{ v.name }}</h3>
+                <h3>{{ v.name }}</h3>
                 <p>{{ v.description|truncatechars:90 }}</p>
                 <div class="price">₹ {{ v.price }}</div>
                 <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
             </div>
         </div>
+        {% empty %}
+        <p>No new bikes available</p>
+        {% endfor %}
+    </div>
+
+    <!-- OLD CARS -->
+    <h2 id="old-cars" style="margin-top:60px;">Old Cars</h2>
+    <div class="vehicle-grid">
+        {% for v in old_cars %}
+        <div class="vehicle-card">
+            <img src="{{ v.image.url }}">
+            <div class="vehicle-body">
+                <h3>{{ v.name }}</h3>
+                <p>{{ v.description|truncatechars:90 }}</p>
+                <div class="price">₹ {{ v.price }}</div>
+                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No old cars available</p>
+        {% endfor %}
+    </div>
+
+    <!-- OLD BIKES -->
+    <h2 id="old-bikes" style="margin-top:60px;">Old Bikes</h2>
+    <div class="vehicle-grid">
+        {% for v in old_bikes %}
+        <div class="vehicle-card">
+            <img src="{{ v.image.url }}">
+            <div class="vehicle-body">
+                <h3>{{ v.name }}</h3>
+                <p>{{ v.description|truncatechars:90 }}</p>
+                <div class="price">₹ {{ v.price }}</div>
+                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No old bikes available</p>
         {% endfor %}
     </div>
 

@@ -6,9 +6,19 @@ from .models import Vehicle, SellExchange, LoanRequest
 
 # ---------- HOME ----------
 def home(request):
+    # NEW
+    new_cars = Vehicle.objects.filter(condition='new', vehicle_type='car')
+    new_bikes = Vehicle.objects.filter(condition='new', vehicle_type='bike')
+
+    # OLD
+    old_cars = Vehicle.objects.filter(condition='old', vehicle_type='car')
+    old_bikes = Vehicle.objects.filter(condition='old', vehicle_type='bike')
+
     context = {
-        'new_vehicles': Vehicle.objects.filter(condition='new'),
-        'old_vehicles': Vehicle.objects.filter(condition='old'),
+        'new_cars': new_cars,
+        'new_bikes': new_bikes,
+        'old_cars': old_cars,
+        'old_bikes': old_bikes,
     }
     return render(request, 'home.html', context)
 
@@ -146,3 +156,25 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+def buy_new(request):
+    cars = Vehicle.objects.filter(condition='new', vehicle_type='car')
+    bikes = Vehicle.objects.filter(condition='new', vehicle_type='bike')
+
+    return render(request, 'buy_new.html', {
+        'cars': cars,
+        'bikes': bikes,
+        'title': 'New Vehicles'
+    })
+
+
+def buy_old(request):
+    cars = Vehicle.objects.filter(condition='old', vehicle_type='car')
+    bikes = Vehicle.objects.filter(condition='old', vehicle_type='bike')
+
+    return render(request, 'buy_old.html', {
+        'cars': cars,
+        'bikes': bikes,
+        'title': 'Old Vehicles'
+    })

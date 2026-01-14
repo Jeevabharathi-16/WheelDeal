@@ -18,4 +18,8 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
+
+    path('new/', buy_new, name='buy_new'),
+    path('old/', buy_old, name='buy_old'),
+
 ]
