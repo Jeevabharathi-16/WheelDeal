@@ -1,32 +1,40 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
+
 <div class="container">
 
-<h2 class="section-title">Buy New Vehicles</h2>
-<div class="cards">
-{% for v in new %}
-    <div class="card">
-        <img src="{{ v.image.url }}">
-        <h3>{{ v.name }}</h3>
-        <p>₹ {{ v.price }}</p>
-        <a href="/add/{{v.id}}/" class="btn">Add to Cart</a>
-        <a href="/loan/{{v.id}}/" class="btn">Loan</a>
+    <h2 id="new">New Vehicles</h2>
+
+    <div class="vehicle-grid">
+        {% for v in new_vehicles %}
+        <div class="vehicle-card">
+            <img src="{{ v.image.url }}">
+            <div class="vehicle-body">
+                <h3>{{ v.brand }} {{ v.name }}</h3>
+                <p>{{ v.description|truncatechars:90 }}</p>
+                <div class="price">₹ {{ v.price }}</div>
+                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-{% endfor %}
+
+    <h2 id="old" style="margin-top:60px;">Old Vehicles</h2>
+
+    <div class="vehicle-grid">
+        {% for v in old_vehicles %}
+        <div class="vehicle-card">
+            <img src="{{ v.image.url }}">
+            <div class="vehicle-body">
+                <h3>{{ v.brand }} {{ v.name }}</h3>
+                <p>{{ v.description|truncatechars:90 }}</p>
+                <div class="price">₹ {{ v.price }}</div>
+                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
 
-<h2 class="section-title">Buy Used Vehicles</h2>
-<div class="cards">
-{% for v in old %}
-    <div class="card">
-        <img src="{{ v.image.url }}">
-        <h3>{{ v.name }}</h3>
-        <p>₹ {{ v.price }}</p>
-        <a href="/add/{{v.id}}/" class="btn">Add to Cart</a>
-        <a href="/loan/{{v.id}}/" class="btn">Loan</a>
-    </div>
-{% endfor %}
-</div>
-
-</div>
 {% endblock %}
