@@ -90,6 +90,12 @@ def sell_exchange(request):
     return render(request, 'sell.html')
 
 
+# ---------- LOAN LIST (⭐ THIS WAS MISSING ⭐) ----------
+def loan_list(request):
+    vehicles = Vehicle.objects.all()
+    return render(request, 'loan_list.html', {'vehicles': vehicles})
+
+
 # ---------- LOAN ----------
 def loan(request, id):
     v = Vehicle.objects.get(id=id)

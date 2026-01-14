@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="section-title">Loan Available Vehicles</h2>
+
+<div class="vehicle-grid">
+    {% for v in vehicles %}
+    <div class="vehicle-card">
+        <img src="{{ v.image.url }}">
+        <div class="vehicle-body">
+            <h3>{{ v.name }}</h3>
+            <p>{{ v.description }}</p>
+            <div class="price">₹ {{ v.price }}</div>
+            <a href="{% url 'loan' v.id %}" class="btn">Apply Loan</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

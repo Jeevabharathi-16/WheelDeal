@@ -11,6 +11,8 @@ urlpatterns = [
     path('decrease/<int:id>/', decrease, name='decrease'),
 
     path('sell/', sell_exchange, name='sell'),
+
+    path('loan/', loan_list, name='loan_list'),
     path('loan/<int:id>/', loan, name='loan'),
 
     path('signup/', signup, name='signup'),

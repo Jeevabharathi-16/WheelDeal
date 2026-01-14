@@ -21,13 +21,13 @@ a {
 }
 
 /* ================= NAVBAR ================= */
-/* ================= NAVBAR ================= */
 .navbar {
     background: linear-gradient(to right, #0b2e59, #0e4a8c);
     padding: 15px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 /* Logo */
@@ -42,9 +42,7 @@ a {
     display: flex;
     align-items: center;
     gap: 25px;
-    list-style: none;     /* removes bullet points */
-    margin: 0;
-    padding: 0;
+    list-style: none;
 }
 
 .nav-links li {
@@ -61,16 +59,41 @@ a {
     text-decoration: underline;
 }
 
-/* Login Button */
-.login-btn {
-    background: gold;
-    padding: 8px 18px;
-    border-radius: 20px;
-    color: black;
-    font-weight: bold;
-    white-space: nowrap;
+/* ================= AUTH BUTTONS ================= */
+.auth-buttons {
+    display: flex;
+    gap: 12px;
 }
 
+/* Login */
+.login-btn {
+    background: white;
+    color: #0b2e59;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px solid #0b2e59;
+}
+
+.login-btn:hover {
+    background: gold;
+    color: black;
+}
+
+/* Signup */
+.signup-btn {
+    background: gold;
+    color: black;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.signup-btn:hover {
+    background: white;
+    color: #0b2e59;
+    border: 2px solid #0b2e59;
+}
 
 /* ================= BUTTON ================= */
 .btn {
@@ -137,7 +160,11 @@ a {
 
 /* ================= CART PAGE ================= */
 .cart-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
     margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* ================= FORMS ================= */
@@ -175,11 +202,16 @@ form button:hover {
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
+        text-align: center;
     }
 
-    .nav-links a {
-        display: block;
-        margin: 8px 0;
+    .nav-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .auth-buttons {
+        justify-content: center;
     }
 }
