@@ -1,10 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Vehicle(models.Model):
     TYPE = [('car', 'Car'), ('bike', 'Bike')]
     CONDITION = [('new', 'New'), ('old', 'Old')]
+    FUEL = [
+        ('petrol', 'Petrol'),
+        ('diesel', 'Diesel'),
+        ('electric', 'Electric'),
+        ('hybrid', 'Hybrid'),
+    ]
+    TRANSMISSION = [
+        ('manual', 'Manual'),
+        ('automatic', 'Automatic'),
+    ]
 
+    # Basic
     brand = models.CharField(max_length=50)
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -13,8 +25,26 @@ class Vehicle(models.Model):
     vehicle_type = models.CharField(max_length=10, choices=TYPE)
     condition = models.CharField(max_length=10, choices=CONDITION)
 
+    # Fuel & Performance
+    fuel_type = models.CharField(max_length=10, choices=FUEL)
+    mileage = models.FloatField(help_text="km/l or km/charge")
+    transmission = models.CharField(max_length=10, choices=TRANSMISSION)
+
+    # Engine / Battery
+    engine_cc = models.IntegerField(null=True, blank=True)
+    battery_capacity = models.FloatField(null=True, blank=True, help_text="kWh")
+    power = models.IntegerField(null=True, blank=True, help_text="bhp")
+
+    # Old vehicle details
+    year = models.IntegerField(null=True, blank=True)
+    km_driven = models.IntegerField(null=True, blank=True)
+    ownership = models.CharField(max_length=50, null=True, blank=True)
+    insurance_valid = models.BooleanField(default=False)
+
     def __str__(self):
         return f"{self.brand} {self.name}"
+
+
 
 
 class Cart(models.Model):

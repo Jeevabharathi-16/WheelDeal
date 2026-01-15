@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- HERO / INTRO -->
+<section class="hero">
+    <h1>Welcome to WheelDeal</h1>
+    <p>
+        WheelDeal is your one-stop platform to buy, sell, and exchange
+        cars and bikes with ease. Explore new and used vehicles, apply for loans,
+        and find the perfect ride for your journey.
+    </p>
+</section>
+
 <div class="container">
 
     <!-- NEW CARS -->
-    <h2 id="new-cars">New Cars</h2>
+    <div class="section-header">
+        <h2>New Cars</h2>
+        <a href="{% url 'buy_new' %}" class="see-more">See all →</a>
+    </div>
+
     <div class="vehicle-grid">
         {% for v in new_cars %}
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.description|truncatechars:90 }}</p>
+                <h3>{{ v.brand }} {{ v.name }}</h3>
                 <div class="price">₹ {{ v.price }}</div>
-                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+                <a href="{% url 'vehicle_detail' v.id %}" class="btn">View Details</a>
             </div>
         </div>
         {% empty %}
@@ -21,17 +34,21 @@
         {% endfor %}
     </div>
 
+
     <!-- NEW BIKES -->
-    <h2 id="new-bikes" style="margin-top:60px;">New Bikes</h2>
+    <div class="section-header">
+        <h2>New Bikes</h2>
+        <a href="{% url 'buy_new' %}" class="see-more">See all →</a>
+    </div>
+
     <div class="vehicle-grid">
         {% for v in new_bikes %}
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.description|truncatechars:90 }}</p>
+                <h3>{{ v.brand }} {{ v.name }}</h3>
                 <div class="price">₹ {{ v.price }}</div>
-                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+                <a href="{% url 'vehicle_detail' v.id %}" class="btn">View Details</a>
             </div>
         </div>
         {% empty %}
@@ -39,39 +56,34 @@
         {% endfor %}
     </div>
 
-    <!-- OLD CARS -->
-    <h2 id="old-cars" style="margin-top:60px;">Old Cars</h2>
-    <div class="vehicle-grid">
-        {% for v in old_cars %}
-        <div class="vehicle-card">
-            <img src="{{ v.image.url }}">
-            <div class="vehicle-body">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.description|truncatechars:90 }}</p>
-                <div class="price">₹ {{ v.price }}</div>
-                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
-            </div>
-        </div>
-        {% empty %}
-        <p>No old cars available</p>
-        {% endfor %}
+
+    <!-- OLD VEHICLES -->
+    <div class="section-header">
+        <h2>Used Vehicles</h2>
+        <a href="{% url 'buy_old' %}" class="see-more">See all →</a>
     </div>
 
-    <!-- OLD BIKES -->
-    <h2 id="old-bikes" style="margin-top:60px;">Old Bikes</h2>
     <div class="vehicle-grid">
-        {% for v in old_bikes %}
+        {% for v in old_cars|slice:":2" %}
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.description|truncatechars:90 }}</p>
+                <h3>{{ v.brand }} {{ v.name }}</h3>
                 <div class="price">₹ {{ v.price }}</div>
-                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+                <a href="{% url 'vehicle_detail' v.id %}" class="btn">View Details</a>
             </div>
         </div>
-        {% empty %}
-        <p>No old bikes available</p>
+        {% endfor %}
+
+        {% for v in old_bikes|slice:":2" %}
+        <div class="vehicle-card">
+            <img src="{{ v.image.url }}">
+            <div class="vehicle-body">
+                <h3>{{ v.brand }} {{ v.name }}</h3>
+                <div class="price">₹ {{ v.price }}</div>
+                <a href="{% url 'vehicle_detail' v.id %}" class="btn">View Details</a>
+            </div>
+        </div>
         {% endfor %}
     </div>
 

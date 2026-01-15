@@ -30,22 +30,16 @@ a {
     flex-wrap: wrap;
 }
 
-/* Logo */
 .logo {
     font-size: 22px;
     color: white;
     font-weight: bold;
 }
 
-/* Navigation Links */
 .nav-links {
     display: flex;
     align-items: center;
     gap: 25px;
-    list-style: none;
-}
-
-.nav-links li {
     list-style: none;
 }
 
@@ -65,7 +59,6 @@ a {
     gap: 12px;
 }
 
-/* Login */
 .login-btn {
     background: white;
     color: #0b2e59;
@@ -80,7 +73,6 @@ a {
     color: black;
 }
 
-/* Signup */
 .signup-btn {
     background: gold;
     color: black;
@@ -93,6 +85,50 @@ a {
     background: white;
     color: #0b2e59;
     border: 2px solid #0b2e59;
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
+    background: linear-gradient(to right, #0b2e59, #0e4a8c);
+    color: white;
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+/* ================= SECTION HEADER ================= */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.section-header h2 {
+    font-size: 26px;
+    color: #0b2e59;
+}
+
+.see-more {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0e4a8c;
+}
+
+.see-more:hover {
+    text-decoration: underline;
 }
 
 /* ================= BUTTON ================= */
@@ -108,6 +144,14 @@ a {
 
 .btn:hover {
     background: #083566;
+}
+
+.btn.secondary {
+    background: #555;
+}
+
+.btn.secondary:hover {
+    background: #333;
 }
 
 /* ================= VEHICLE GRID ================= */
@@ -128,13 +172,13 @@ a {
 }
 
 .vehicle-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
 }
 
 /* ================= IMAGE FIX ================= */
 .vehicle-card img {
     width: 100%;
-    height: 180px;
+    height: 190px;
     object-fit: cover;
 }
 
@@ -156,6 +200,42 @@ a {
 .price {
     font-weight: bold;
     margin-top: 8px;
+    color: #000;
+}
+
+/* ================= DETAIL PAGE ================= */
+.detail-page {
+    margin-top: 50px;
+}
+
+.detail-card {
+    display: flex;
+    gap: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.detail-img {
+    width: 420px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.detail-info h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.detail-info p {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.description {
+    margin-top: 15px;
+    line-height: 1.6;
 }
 
 /* ================= CART PAGE ================= */
@@ -213,5 +293,14 @@ form button:hover {
 
     .auth-buttons {
         justify-content: center;
+    }
+
+    .detail-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .detail-img {
+        width: 100%;
     }
 }

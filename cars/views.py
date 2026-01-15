@@ -2,17 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Vehicle, SellExchange, LoanRequest
-
+from django.shortcuts import get_object_or_404
 
 # ---------- HOME ----------
 def home(request):
-    # NEW
-    new_cars = Vehicle.objects.filter(condition='new', vehicle_type='car')
-    new_bikes = Vehicle.objects.filter(condition='new', vehicle_type='bike')
+    # Show ONLY LIMITED items on home page
+    new_cars = Vehicle.objects.filter(condition='new', vehicle_type='car')[:4]
+    new_bikes = Vehicle.objects.filter(condition='new', vehicle_type='bike')[:4]
 
-    # OLD
-    old_cars = Vehicle.objects.filter(condition='old', vehicle_type='car')
-    old_bikes = Vehicle.objects.filter(condition='old', vehicle_type='bike')
+    old_cars = Vehicle.objects.filter(condition='old', vehicle_type='car')[:4]
+    old_bikes = Vehicle.objects.filter(condition='old', vehicle_type='bike')[:4]
 
     context = {
         'new_cars': new_cars,
@@ -41,9 +40,15 @@ def cart(request):
     cart = request.session.get('cart', {})
     items = []
     total = 0
+    updated_cart = {}
 
     for vid, qty in cart.items():
-        v = Vehicle.objects.get(id=vid)
+        try:
+            v = Vehicle.objects.get(id=vid)
+        except Vehicle.DoesNotExist:
+            # skip deleted vehicle
+            continue
+
         subtotal = v.price * qty
         total += subtotal
 
@@ -53,7 +58,16 @@ def cart(request):
             'subtotal': subtotal
         })
 
-    return render(request, 'cart.html', {'items': items, 'total': total})
+        # keep only valid vehicles
+        updated_cart[str(vid)] = qty
+
+    # clean cart session
+    request.session['cart'] = updated_cart
+
+    return render(request, 'cart.html', {
+        'items': items,
+        'total': total
+    })
 
 
 def remove_cart(request, id):
@@ -84,6 +98,9 @@ def decrease(request, id):
 
 # ---------- SELL ----------
 def sell_exchange(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     if request.method == 'POST':
         SellExchange.objects.create(
             user=request.user,
@@ -177,4 +194,13 @@ def buy_old(request):
         'cars': cars,
         'bikes': bikes,
         'title': 'Old Vehicles'
+    })
+
+
+
+def vehicle_detail(request, id):
+    vehicle = get_object_or_404(Vehicle, id=id)
+
+    return render(request, 'vehicle_detail.html', {
+        'vehicle': vehicle
     })

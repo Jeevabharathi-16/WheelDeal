@@ -9,10 +9,11 @@
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.description|truncatechars:90 }}</p>
+                <h3>{{ v.brand }} {{ v.name }}</h3>
                 <div class="price">₹ {{ v.price }}</div>
-                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+                <a href="{% url 'vehicle_detail' v.id %}" class="btn">
+                    View Details
+                </a>
             </div>
         </div>
         {% empty %}
@@ -26,10 +27,11 @@
         <div class="vehicle-card">
             <img src="{{ v.image.url }}">
             <div class="vehicle-body">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.description|truncatechars:90 }}</p>
+                <h3>{{ v.brand }} {{ v.name }}</h3>
                 <div class="price">₹ {{ v.price }}</div>
-                <a href="{% url 'add' v.id %}" class="btn">Add to Cart</a>
+                <a href="{% url 'vehicle_detail' v.id %}" class="btn">
+                    View Details
+                </a>
             </div>
         </div>
         {% empty %}

@@ -22,4 +22,7 @@ urlpatterns = [
     path('new/', buy_new, name='buy_new'),
     path('old/', buy_old, name='buy_old'),
 
+    path('vehicle/<int:id>/', vehicle_detail, name='vehicle_detail'),
+
+
 ]
