@@ -125,6 +125,9 @@ def loan_list(request):
 
 # ---------- LOAN ----------
 def loan(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     v = Vehicle.objects.get(id=id)
 
     if request.method == 'POST':
@@ -138,6 +141,7 @@ def loan(request, id):
         return redirect('home')
 
     return render(request, 'loan.html', {'v': v})
+
 
 
 # ---------- AUTH ----------
