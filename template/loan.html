@@ -2,37 +2,62 @@
 {% block content %}
 
 <div class="container">
-    <div class="form-box" style="max-width:600px;margin:auto;">
+    <div class="form-box" style="max-width:650px;margin:auto;">
         <h2>Apply Loan for {{ v.name }}</h2>
-        
 
         <form method="POST">
             {% csrf_token %}
 
-            <!-- Personal Info -->
-            <input type="text" name="fullname" placeholder="Full Name" required>
+            <!-- Personal Details -->
+            <label>Full Name</label>
+            <input type="text" name="fullname" placeholder="Enter your full name" required>
 
-            <input type="email" name="email" placeholder="Email Address" required>
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
 
-            <input type="text" name="contact" placeholder="Mobile Number" required>
+            <label>Mobile Number</label>
+            <input type="text" name="contact" placeholder="Enter 10 digit mobile number" required>
+
+            <!-- Location -->
+            <label>Country</label>
+            <select name="country" required>
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="UAE">UAE</option>
+            </select>
+
+            <label>State</label>
+            <select name="state" required>
+                <option value="">Select State</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Kerala">Kerala</option>
+            </select>
 
             <!-- Financial Info -->
-            <input type="number" name="income" placeholder="Monthly Income (₹)" required>
+            <label>Monthly Income (₹)</label>
+            <input type="number" name="income" placeholder="Enter monthly income" required>
 
-            <input type="number" name="down_payment" placeholder="Down Payment (₹)" required>
+            <label>Down Payment (₹)</label>
+            <input type="number" name="down_payment" placeholder="Enter down payment amount" required>
 
+            <label>Employment Type</label>
             <select name="employment" required>
-                <option value="">Employment Type</option>
-                <option value="salaried">Salaried</option>
-                <option value="self-employed">Self Employed</option>
-                <option value="student">Student</option>
+                <option value="">Select Employment</option>
+                <option value="Salaried">Salaried</option>
+                <option value="Self-Employed">Self Employed</option>
+                <option value="Student">Student</option>
             </select>
 
             <!-- Loan Info -->
-            <input type="number" name="amount" placeholder="Loan Amount (₹)" required>
+            <label>Loan Amount (₹)</label>
+            <input type="number" name="amount" placeholder="Enter loan amount" required>
 
+            <label>Loan Tenure</label>
             <select name="tenure" required>
-                <option value="">Loan Tenure</option>
+                <option value="">Select Tenure</option>
                 <option value="12">12 Months</option>
                 <option value="24">24 Months</option>
                 <option value="36">36 Months</option>
@@ -40,16 +65,17 @@
                 <option value="60">60 Months</option>
             </select>
 
+            <label>Preferred EMI Date</label>
             <select name="emi_day" required>
-                <option value="">Preferred EMI Date</option>
-                <option value="5">5th of Every Month</option>
-                <option value="10">10th of Every Month</option>
-                <option value="15">15th of Every Month</option>
-                <option value="20">20th of Every Month</option>
+                <option value="">Select EMI Date</option>
+                <option value="5">5th</option>
+                <option value="10">10th</option>
+                <option value="15">15th</option>
+                <option value="20">20th</option>
             </select>
 
-            <!-- Notes -->
-            <textarea name="remarks" placeholder="Any additional notes (optional)"></textarea>
+            <label>Additional Notes</label>
+            <textarea name="remarks" placeholder="Any additional information (optional)"></textarea>
 
             <button class="btn">Submit Loan Application</button>
         </form>
