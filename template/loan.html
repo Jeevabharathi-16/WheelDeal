@@ -1,14 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="form-box">
-<h2>Loan for {{ v.name }}</h2>
 
-<form method="POST">
-{% csrf_token %}
-<input type="number" name="amount" placeholder="Loan Amount">
-<input type="number" name="tenure" placeholder="Tenure (months)">
-<input type="text" name="contact" placeholder="Contact Number">
-<button class="btn">Apply Loan</button>
-</form>
+<div class="container">
+    <div class="form-box" style="max-width:600px;margin:auto;">
+        <h2>Apply Loan for {{ v.name }}</h2>
+        
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Personal Info -->
+            <input type="text" name="fullname" placeholder="Full Name" required>
+
+            <input type="email" name="email" placeholder="Email Address" required>
+
+            <input type="text" name="contact" placeholder="Mobile Number" required>
+
+            <!-- Financial Info -->
+            <input type="number" name="income" placeholder="Monthly Income (₹)" required>
+
+            <input type="number" name="down_payment" placeholder="Down Payment (₹)" required>
+
+            <select name="employment" required>
+                <option value="">Employment Type</option>
+                <option value="salaried">Salaried</option>
+                <option value="self-employed">Self Employed</option>
+                <option value="student">Student</option>
+            </select>
+
+            <!-- Loan Info -->
+            <input type="number" name="amount" placeholder="Loan Amount (₹)" required>
+
+            <select name="tenure" required>
+                <option value="">Loan Tenure</option>
+                <option value="12">12 Months</option>
+                <option value="24">24 Months</option>
+                <option value="36">36 Months</option>
+                <option value="48">48 Months</option>
+                <option value="60">60 Months</option>
+            </select>
+
+            <select name="emi_day" required>
+                <option value="">Preferred EMI Date</option>
+                <option value="5">5th of Every Month</option>
+                <option value="10">10th of Every Month</option>
+                <option value="15">15th of Every Month</option>
+                <option value="20">20th of Every Month</option>
+            </select>
+
+            <!-- Notes -->
+            <textarea name="remarks" placeholder="Any additional notes (optional)"></textarea>
+
+            <button class="btn">Submit Loan Application</button>
+        </form>
+    </div>
 </div>
+
 {% endblock %}
