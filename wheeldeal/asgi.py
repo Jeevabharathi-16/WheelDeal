@@ -1,5 +1,5 @@
 """
-ASGI config for wheeldeal project.
+ASGI config for WheelDeal project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

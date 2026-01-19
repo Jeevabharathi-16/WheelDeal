@@ -23,7 +23,20 @@ def home(request):
 
 
 # ---------- ADD TO CART ----------
+# def add_to_cart(request, id):
+#     cart = request.session.get('cart', {})
+
+#     if str(id) in cart:
+#         cart[str(id)] += 1
+#     else:
+#         cart[str(id)] = 1
+
+#     request.session['cart'] = cart
+#     return redirect('cart')
 def add_to_cart(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     cart = request.session.get('cart', {})
 
     if str(id) in cart:
@@ -35,8 +48,12 @@ def add_to_cart(request, id):
     return redirect('cart')
 
 
+
 # ---------- CART ----------
 def cart(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     cart = request.session.get('cart', {})
     items = []
     total = 0
@@ -71,6 +88,9 @@ def cart(request):
 
 
 def remove_cart(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     cart = request.session.get('cart', {})
     if str(id) in cart:
         del cart[str(id)]
@@ -79,6 +99,9 @@ def remove_cart(request, id):
 
 
 def increase(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     cart = request.session.get('cart', {})
     cart[str(id)] = cart.get(str(id), 0) + 1
     request.session['cart'] = cart
@@ -86,6 +109,9 @@ def increase(request, id):
 
 
 def decrease(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     cart = request.session.get('cart', {})
     if str(id) in cart:
         if cart[str(id)] > 1:
@@ -97,12 +123,31 @@ def decrease(request, id):
 
 
 # ---------- SELL ----------
+# def sell_exchange(request):
+#     if not request.user.is_authenticated:
+#         return redirect('login')
+
+#     if request.method == 'POST':
+#         SellExchange.objects.create(
+#             user=request.user,
+#             vehicle_type=request.POST['type'],
+#             brand=request.POST['brand'],
+#             model=request.POST['model'],
+#             year=request.POST['year'],
+#             description=request.POST['description'],
+#             price=request.POST['price'],
+#             exchange=True if 'exchange' in request.POST else False
+#         )
+#         return redirect('home')
+
+#     return render(request, 'sell.html')
+
 def sell_exchange(request):
     if not request.user.is_authenticated:
         return redirect('login')
 
     if request.method == 'POST':
-        SellExchange.objects.create(
+        sell = SellExchange.objects.create(
             user=request.user,
             vehicle_type=request.POST['type'],
             brand=request.POST['brand'],
@@ -110,9 +155,26 @@ def sell_exchange(request):
             year=request.POST['year'],
             description=request.POST['description'],
             price=request.POST['price'],
+            image=request.FILES['image'],  # ✅ IMAGE
             exchange=True if 'exchange' in request.POST else False
         )
-        return redirect('home')
+
+        # ✅ CREATE OLD VEHICLE FOR BUY PAGE
+        Vehicle.objects.create(
+            brand=sell.brand,
+            name=sell.model,
+            description=sell.description,
+            price=sell.price,
+            image=sell.image,
+            vehicle_type=sell.vehicle_type,
+            condition='old',     # 🔑 key
+            fuel_type='petrol',  # default
+            mileage=0,
+            transmission='manual',
+            year=sell.year,
+        )
+
+        return redirect('buy_old')
 
     return render(request, 'sell.html')
 

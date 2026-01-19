@@ -1,5 +1,5 @@
 """
-WSGI config for wheeldeal project.
+WSGI config for WheelDeal project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
