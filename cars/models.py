@@ -63,8 +63,8 @@ class SellExchange(models.Model):
     year = models.IntegerField()
     description = models.TextField()
     price = models.IntegerField()
+    image = models.ImageField(upload_to='sell_exchange/', null=True, blank=True)
     exchange = models.BooleanField(default=False)
-
 
 class LoanRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

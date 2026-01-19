@@ -51,7 +51,7 @@ MIDDLEWARE = [
     
 ]
 
-ROOT_URLCONF = 'WheelDeal.urls'
+ROOT_URLCONF = 'wheeldeal.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'WheelDeal.wsgi.application'
+WSGI_APPLICATION = 'wheeldeal.wsgi.application'
 
 
 # Database

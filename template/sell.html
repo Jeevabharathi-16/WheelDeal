@@ -8,7 +8,7 @@
         Share your vehicle details and get the best selling or exchange offers easily.
     </p>
 
-    <form method="POST" class="form-box sell-form">
+    <form method="POST" class="form-box sell-form" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- Vehicle Type -->
@@ -43,6 +43,11 @@
         <div class="form-group">
             <label>Expected Price (₹)</label>
             <input type="number" name="price" placeholder="Eg: 450000" required>
+        </div>
+        <!--image upload-->
+        <div class="form-group">
+            <label>Vehicle Image</label>
+            <input type="file" name="image" accept="image/*" required>
         </div>
 
         <!-- Extra UI only fields (DB SAFE) -->
