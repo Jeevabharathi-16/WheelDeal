@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h2>My Cart</h2>
+
+    {% if items %}
+        {% for i in items %}
+        <div class="vehicle-card" style="margin-bottom:20px;">
+            <div class="vehicle-body">
+                <h3>{{ i.vehicle.brand }} {{ i.vehicle.name }}</h3>
+                <p>Price: ₹ {{ i.vehicle.price }}</p>
+
+                <p>
+                    <a href="{% url 'decrease' i.vehicle.id %}" class="btn">-</a>
+                    Quantity: {{ i.quantity }}
+                    <a href="{% url 'increase' i.vehicle.id %}" class="btn">+</a>
+                </p>
+
+                <p><b>Subtotal:</b> ₹ {{ i.subtotal }}</p>
+
+                <a href="{% url 'remove' i.vehicle.id %}" class="btn">Remove</a>
+            </div>
+        </div>
+        {% endfor %}
+
+        <h3>Total: ₹ {{ total }}</h3>
+    {% else %}
+        <p>Your cart is empty</p>
+    {% endif %}
+</div>
+
+{% endblock %}

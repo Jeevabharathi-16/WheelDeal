@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container detail-page">
+
+    <div class="detail-card">
+        <img src="{{ vehicle.image.url }}" class="detail-img">
+
+        <div class="detail-info">
+            <h2>{{ vehicle.brand }} {{ vehicle.name }}</h2>
+
+            <!-- BASIC INFO -->
+            <p><strong>Type:</strong> {{ vehicle.vehicle_type|title }}</p>
+            <p><strong>Condition:</strong> {{ vehicle.condition|title }}</p>
+            <p><strong>Fuel:</strong> {{ vehicle.fuel_type|title }}</p>
+            <p><strong>Transmission:</strong> {{ vehicle.transmission|title }}</p>
+
+            <!-- MILEAGE -->
+            <p>
+                <strong>Mileage:</strong>
+                {% if vehicle.fuel_type == "electric" %}
+                    ⚡ {{ vehicle.mileage }} km/charge
+                {% else %}
+                    ⛽ {{ vehicle.mileage }} km/l
+                {% endif %}
+            </p>
+
+            <!-- ENGINE / BATTERY -->
+            {% if vehicle.fuel_type == "electric" or vehicle.fuel_type == "hybrid" %}
+                <p>
+                    <strong>Battery Capacity:</strong>
+                    ⚡ {{ vehicle.battery_capacity }} kWh
+                </p>
+            {% endif %}
+
+            {% if vehicle.engine_cc %}
+                <p><strong>Engine:</strong> {{ vehicle.engine_cc }} cc</p>
+            {% endif %}
+
+            {% if vehicle.power %}
+                <p><strong>Power:</strong> {{ vehicle.power }} bhp</p>
+            {% endif %}
+
+            <!-- OLD VEHICLE DETAILS -->
+            {% if vehicle.condition == "old" %}
+                {% if vehicle.year %}
+                    <p><strong>Year:</strong> {{ vehicle.year }}</p>
+                {% endif %}
+                {% if vehicle.km_driven %}
+                    <p><strong>KMs Driven:</strong> {{ vehicle.km_driven }}</p>
+                {% endif %}
+                {% if vehicle.ownership %}
+                    <p><strong>Ownership:</strong> {{ vehicle.ownership }}</p>
+                {% endif %}
+                <p>
+                    <strong>Insurance:</strong>
+                    {% if vehicle.insurance_valid %}
+                        ✅ Valid
+                    {% else %}
+                        ❌ Not Valid
+                    {% endif %}
+                </p>
+            {% endif %}
+
+            <!-- DESCRIPTION -->
+            <p class="description">
+                {{ vehicle.description }}
+            </p>
+
+            <!-- PRICE -->
+            <h3 class="price">₹ {{ vehicle.price }}</h3>
+
+            <!-- ACTIONS -->
+            <a href="{% url 'add' vehicle.id %}" class="btn">
+                Add to Cart
+            </a>
+
+            <a href="{% url 'loan' vehicle.id %}" class="btn secondary">
+                Apply Loan
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+
+    <h2 class="page-title">Sell / Exchange Your Vehicle</h2>
+    <p class="page-subtitle">
+        Share your vehicle details and get the best selling or exchange offers easily.
+    </p>
+
+    <form method="POST" class="form-box sell-form">
+        {% csrf_token %}
+
+        <!-- Vehicle Type -->
+        <div class="form-group">
+            <label>Vehicle Type</label>
+            <select name="type" required>
+                <option value="">Select Vehicle</option>
+                <option value="car">Car</option>
+                <option value="bike">Bike</option>
+            </select>
+        </div>
+
+        <!-- Brand -->
+        <div class="form-group">
+            <label>Brand</label>
+            <input type="text" name="brand" placeholder="Eg: Honda, Hyundai" required>
+        </div>
+
+        <!-- Model -->
+        <div class="form-group">
+            <label>Model</label>
+            <input type="text" name="model" placeholder="Eg: City, i20" required>
+        </div>
+
+        <!-- Manufacturing Year -->
+        <div class="form-group">
+            <label>Manufacturing Year</label>
+            <input type="number" name="year" placeholder="Eg: 2020" required>
+        </div>
+
+        <!-- Expected Price -->
+        <div class="form-group">
+            <label>Expected Price (₹)</label>
+            <input type="number" name="price" placeholder="Eg: 450000" required>
+        </div>
+
+        <!-- Extra UI only fields (DB SAFE) -->
+        <div class="form-group">
+            <label>Kilometers Driven</label>
+            <input type="number" placeholder="Eg: 35000 km">
+        </div>
+
+        <div class="form-group">
+            <label>Fuel Type</label>
+            <select>
+                <option value="">Select Fuel Type</option>
+                <option>Petrol</option>
+                <option>Diesel</option>
+                <option>Electric</option>
+                <option>Hybrid</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Ownership</label>
+            <select>
+                <option value="">Select Owner Type</option>
+                <option>First Owner</option>
+                <option>Second Owner</option>
+                <option>Third Owner</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Location (City)</label>
+            <input type="text" placeholder="Eg: Bengaluru">
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label>Vehicle Description</label>
+            <textarea
+                name="description"
+                placeholder="Condition, usage, service history, reason for selling, etc."
+                required></textarea>
+        </div>
+
+        <!-- ✅ FIXED: Checkbox LEFT + text together -->
+        <div class="form-group exchange-row">
+            <label class="exchange-label">
+                <input type="checkbox" name="exchange">
+                <span>I want to exchange my vehicle</span>
+            </label>
+        </div>
+
+        <!-- Submit -->
+        <button class="btn submit-btn">Submit Request</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
