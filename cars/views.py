@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from .models import Vehicle, SellExchange, LoanRequest
 from django.shortcuts import get_object_or_404
 
-# ---------- HOME ----------
+
 def home(request):
-    # Show ONLY LIMITED items on home page
+    
     new_cars = Vehicle.objects.filter(condition='new', vehicle_type='car')[:4]
     new_bikes = Vehicle.objects.filter(condition='new', vehicle_type='bike')[:4]
 
@@ -49,7 +49,7 @@ def add_to_cart(request, id):
 
 
 
-# ---------- CART ----------
+
 def cart(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -63,7 +63,6 @@ def cart(request):
         try:
             v = Vehicle.objects.get(id=vid)
         except Vehicle.DoesNotExist:
-            # skip deleted vehicle
             continue
 
         subtotal = v.price * qty
@@ -75,10 +74,10 @@ def cart(request):
             'subtotal': subtotal
         })
 
-        # keep only valid vehicles
+        
         updated_cart[str(vid)] = qty
 
-    # clean cart session
+ 
     request.session['cart'] = updated_cart
 
     return render(request, 'cart.html', {
@@ -155,11 +154,11 @@ def sell_exchange(request):
             year=request.POST['year'],
             description=request.POST['description'],
             price=request.POST['price'],
-            image=request.FILES['image'],  # ✅ IMAGE
+            image=request.FILES['image'], 
             exchange=True if 'exchange' in request.POST else False
         )
 
-        # ✅ CREATE OLD VEHICLE FOR BUY PAGE
+        
         Vehicle.objects.create(
             brand=sell.brand,
             name=sell.model,
@@ -167,8 +166,8 @@ def sell_exchange(request):
             price=sell.price,
             image=sell.image,
             vehicle_type=sell.vehicle_type,
-            condition='old',     # 🔑 key
-            fuel_type='petrol',  # default
+            condition='old',    
+            fuel_type='petrol',  
             mileage=0,
             transmission='manual',
             year=sell.year,
@@ -179,13 +178,13 @@ def sell_exchange(request):
     return render(request, 'sell.html')
 
 
-# ---------- LOAN LIST (⭐ THIS WAS MISSING ⭐) ----------
+
 def loan_list(request):
     vehicles = Vehicle.objects.all()
     return render(request, 'loan_list.html', {'vehicles': vehicles})
 
 
-# ---------- LOAN ----------
+
 def loan(request, id):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -206,7 +205,7 @@ def loan(request, id):
 
 
 
-# ---------- AUTH ----------
+
 def signup(request):
     if request.method == 'POST':
         User.objects.create_user(

@@ -29,7 +29,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'WheelDeal.urls'
+ROOT_URLCONF = 'wheeldeal.urls'
 
 TEMPLATES = [
     {
@@ -46,7 +46,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'WheelDeal.wsgi.application'
+WSGI_APPLICATION = 'wheeldeal.wsgi.application'
 
 DATABASES = {
     'default': {
